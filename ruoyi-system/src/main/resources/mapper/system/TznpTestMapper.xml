@@ -25,14 +25,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
         
-    <insert id="insertTznpTest" parameterType="TznpTest">
+    <insert id="insertTznpTest" parameterType="TznpTest" useGeneratedKeys="true" keyProperty="id">
         insert into tznp_test
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">id,</if>
             <if test="name != null">name,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">#{id},</if>
             <if test="name != null">#{name},</if>
          </trim>
     </insert>

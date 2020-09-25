@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="${comment}" prop="name">
+      <el-form-item label="测试名称" prop="name">
         <el-input
           v-model="queryParams.name"
-          placeholder="请输入${comment}"
+          placeholder="请输入测试名称"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
@@ -60,8 +60,8 @@
 
     <el-table v-loading="loading" :data="testList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="${comment}" align="center" prop="id" />
-      <el-table-column label="${comment}" align="center" prop="name" />
+      <el-table-column label="测试编号" align="center" prop="id" />
+      <el-table-column label="测试名称" align="center" prop="name" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -90,11 +90,11 @@
       @pagination="getList"
     />
 
-    <!-- 添加或修改【请填写功能名称】对话框 -->
+    <!-- 添加或修改测试对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="${comment}" prop="name">
-          <el-input v-model="form.name" placeholder="请输入${comment}" />
+        <el-form-item label="测试名称" prop="name">
+          <el-input v-model="form.name" placeholder="请输入测试名称" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -124,7 +124,7 @@ export default {
       showSearch: true,
       // 总条数
       total: 0,
-      // 【请填写功能名称】表格数据
+      // 测试表格数据
       testList: [],
       // 弹出层标题
       title: "",
@@ -147,7 +147,7 @@ export default {
     this.getList();
   },
   methods: {
-    /** 查询【请填写功能名称】列表 */
+    /** 查询测试列表 */
     getList() {
       this.loading = true;
       listTest(this.queryParams).then(response => {
@@ -189,7 +189,7 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
-      this.title = "添加【请填写功能名称】";
+      this.title = "添加测试";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
@@ -198,7 +198,7 @@ export default {
       getTest(id).then(response => {
         this.form = response.data;
         this.open = true;
-        this.title = "修改【请填写功能名称】";
+        this.title = "修改测试";
       });
     },
     /** 提交按钮 */
@@ -228,7 +228,7 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const ids = row.id || this.ids;
-      this.$confirm('是否确认删除【请填写功能名称】编号为"' + ids + '"的数据项?', "警告", {
+      this.$confirm('是否确认删除测试编号为"' + ids + '"的数据项?', "警告", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"
@@ -242,7 +242,7 @@ export default {
     /** 导出按钮操作 */
     handleExport() {
       const queryParams = this.queryParams;
-      this.$confirm('是否确认导出所有【请填写功能名称】数据项?', "警告", {
+      this.$confirm('是否确认导出所有测试数据项?', "警告", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"

@@ -15,11 +15,11 @@ public class TznpTest extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** 用户ID */
+    /** 测试编号 */
     private Long id;
 
-    /** 用户姓名 */
-    @Excel(name = "用户姓名")
+    /** 测试名称 */
+    @Excel(name = "测试名称")
     private String name;
 
     public void setId(Long id) 
