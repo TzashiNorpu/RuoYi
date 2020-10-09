@@ -1,10 +1,10 @@
 import request from '@/utils/request'
 
 
-// 新增【请填写功能名称】
-export function addTest(data) {
+// 证书绑定通知
+export function certificateBindNotice(data) {
   return request({
-    url: '/operation/bindNotice',
+    url: '/operationManage/bindNotice',
     method: 'post',
     data: data
   })

@@ -5,35 +5,34 @@ import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.system.domain.TznpTest;
-import com.ruoyi.system.service.ITznpTestService;
+import com.ruoyi.common.enums.MonitorSystemAddrs;
+import com.ruoyi.web.domain.dcmanage.BindNoticeRes;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
- * 测试Controller
+ * 证书
  *
- * @author ruoyi
- * @date 2020-09-25
+ * @author tzashinorpu
+ * @date 2020-10-09
  */
 @RestController
 @RequestMapping("/operationManage")
 public class CertificateController extends BaseController {
     @Autowired
-    private ITznpTestService tznpTestService;
-
+    RestTemplate restTemplate;
     /**
      * 证书绑定
      */
 //    @PreAuthorize("@ss.hasPermi('system:test:list')")
-    @GetMapping("/bindNotice")
-    public TableDataInfo list(TznpTest tznpTest) {
-        startPage();
-        List<TznpTest> list = tznpTestService.selectTznpTestList(tznpTest);
-        return getDataTable(list);
+    @PostMapping("/bindNotice")
+    public AjaxResult bindNotice(@RequestBody Integer type) {
+        BindNoticeRes bindNoticeRes = restTemplate.getForObject(MonitorSystemAddrs.NET_ADDR.getAddr(), BindNoticeRes.class);
+        return AjaxResult.success(bindNoticeRes);
     }
 }
