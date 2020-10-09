@@ -1,6 +1,7 @@
 package com.ruoyi.web.controller.system;
 
 import java.util.List;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,14 +23,13 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 测试Controller
- * 
+ *
  * @author ruoyi
  * @date 2020-09-25
  */
 @RestController
 @RequestMapping("/system/test")
-public class TznpTestController extends BaseController
-{
+public class TznpTestController extends BaseController {
     @Autowired
     private ITznpTestService tznpTestService;
 
@@ -38,8 +38,7 @@ public class TznpTestController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:test:list')")
     @GetMapping("/list")
-    public TableDataInfo list(TznpTest tznpTest)
-    {
+    public TableDataInfo list(TznpTest tznpTest) {
         startPage();
         List<TznpTest> list = tznpTestService.selectTznpTestList(tznpTest);
         return getDataTable(list);
@@ -51,8 +50,7 @@ public class TznpTestController extends BaseController
     @PreAuthorize("@ss.hasPermi('system:test:export')")
     @Log(title = "测试", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
-    public AjaxResult export(TznpTest tznpTest)
-    {
+    public AjaxResult export(TznpTest tznpTest) {
         List<TznpTest> list = tznpTestService.selectTznpTestList(tznpTest);
         ExcelUtil<TznpTest> util = new ExcelUtil<TznpTest>(TznpTest.class);
         return util.exportExcel(list, "test");
@@ -63,8 +61,7 @@ public class TznpTestController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:test:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Long id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") Long id) {
         return AjaxResult.success(tznpTestService.selectTznpTestById(id));
     }
 
@@ -74,8 +71,7 @@ public class TznpTestController extends BaseController
     @PreAuthorize("@ss.hasPermi('system:test:add')")
     @Log(title = "测试", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody TznpTest tznpTest)
-    {
+    public AjaxResult add(@RequestBody TznpTest tznpTest) {
         return toAjax(tznpTestService.insertTznpTest(tznpTest));
     }
 
@@ -85,8 +81,7 @@ public class TznpTestController extends BaseController
     @PreAuthorize("@ss.hasPermi('system:test:edit')")
     @Log(title = "测试", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody TznpTest tznpTest)
-    {
+    public AjaxResult edit(@RequestBody TznpTest tznpTest) {
         return toAjax(tznpTestService.updateTznpTest(tznpTest));
     }
 
@@ -95,9 +90,8 @@ public class TznpTestController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:test:remove')")
     @Log(title = "测试", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Long[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable Long[] ids) {
         return toAjax(tznpTestService.deleteTznpTestByIds(ids));
     }
 }
