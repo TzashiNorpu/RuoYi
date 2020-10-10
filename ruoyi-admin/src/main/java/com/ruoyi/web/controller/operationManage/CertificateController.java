@@ -32,7 +32,9 @@ public class CertificateController extends BaseController {
 //    @PreAuthorize("@ss.hasPermi('system:test:list')")
     @PostMapping("/bindNotice")
     public AjaxResult bindNotice(@RequestBody Integer type) {
-        BindNoticeRes bindNoticeRes = restTemplate.getForObject(MonitorSystemAddrs.NET_ADDR.getAddr(), BindNoticeRes.class);
+//        BindNoticeRes bindNoticeRes = restTemplate.getForObject(MonitorSystemAddrs.NET_ADDR.getAddr(), BindNoticeRes.class);
+        BindNoticeRes bindNoticeRes = new BindNoticeRes();
+        bindNoticeRes.setStatusCode(202);
         return AjaxResult.success(bindNoticeRes);
     }
 }
